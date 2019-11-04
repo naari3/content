@@ -12,11 +12,17 @@ module.exports = {
       {
         test: /\.ts$/,
         use: "ts-loader"
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: {
+          loader: "url-loader"
+        }
       }
     ]
   },
   resolve: {
-    extensions: [".ts"]
+    extensions: [".ts", ".woff", ".woff2"]
   },
   plugins: [
     new HtmlWebpackPlugin({

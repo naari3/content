@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
     "watch": "webpack -w"
   },
   "author": "naari3 <naari.named@gmail.com>",
@@ -20,6 +20,7 @@
     "prettier": "^1.18.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
+    "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }

@@ -1,3 +1,6 @@
+import SpaceGroteskLightTwo from "./assets/fonts/SpaceGrotesk-Light.woff2";
+import SpaceGroteskLight from "./assets/fonts/SpaceGrotesk-Light.woff";
+
 const b64Strings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=".split(
   ""
 );
@@ -24,8 +27,7 @@ const randomStringClassSafe = (count: number): string => {
 const makeStyle = (className: string): string => {
   return `.${className}::before { content: "${randomString(
     Math.floor(Math.random() * b64Strings.length * 10)
-  )}"; }
-.${className}::after { content: "${randomString(
+  )}"; } .${className}::after { content: "${randomString(
     Math.floor(Math.random() * b64Strings.length * 10)
   )}"; } `;
 };
@@ -37,34 +39,36 @@ const makeBody = (text: string): string => {
       Math.floor(Math.random() * classSafeStrings.length * 10)
     )
   );
-  const html = `
-  <!DOCTYPE html>
-  <html lang="js">
-    <head>
-      <meta charset="utf-8">
-      <style>
-        @font-face {
-          font-family: "Space Grotesk Light";
-          font-weight: 400;
-          font-style: normal;
-          src: url(https://fonts.floriankarsten.com/assets/fonts/SpaceGrotesk-Light.woff2) format("woff2");
-        }
-        body {
-          background-color: #000;
-          color: #fff;
-          word-break: break-all;
-          font-family: 'Space Grotesk Light',sans-serif;
-          font-size: 1rem;
-          font-weight: 400;
-          line-height: 0.8;
-        }
-        ${classes.map(cl => makeStyle(cl)).join("")}</style>
-    </head>
-    <body>
-      ${texts.map((c, i) => `<span class="${classes[i]}">${c}</span>`).join("")}
-    </body>
-  </html>
-  `;
+
+  const style = `
+  @font-face {
+    font-family: "Space Grotesk Light";
+    font-weight: 400;
+    font-style: normal;
+    src: url(${SpaceGroteskLightTwo}),url(${SpaceGroteskLight}) format("woff2");
+  }
+  body {
+    background-color: #000;
+    color: #fff;
+    word-break: break-all;
+    font-family: 'Space Grotesk Light',sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 0.8;
+  } ${classes.map(cl => makeStyle(cl)).join("")}`;
+
+  const body = `${texts
+    .map((c, i) => `<span class="${classes[i]}">${c}</span>`)
+    .join("")}`;
+
+  const html = `<!DOCTYPE html>
+    <html lang="js">
+      <head>
+        <meta charset="utf-8">
+        <style>${style}</style>
+      </head>
+      <body>${body}</body>
+    </html>`.replace(/ +(?= )/g, "");
   return html;
 };
 
