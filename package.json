@@ -1,0 +1,19 @@
+{
+  "name": "content",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "author": "naari3 <naari.named@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/webpack": "^4.39.8",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
