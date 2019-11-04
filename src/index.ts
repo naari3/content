@@ -1,17 +1,15 @@
 import SpaceGroteskLightTwo from "./assets/fonts/SpaceGrotesk-Light.woff2";
 import SpaceGroteskLight from "./assets/fonts/SpaceGrotesk-Light.woff";
 
-const b64Strings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=".split(
+const classSafeStrings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-".split(
   ""
 );
 
-const classSafeStrings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split(
-  ""
-);
+const usingStrings = (classSafeStrings.join("") + "/:.+=").split("");
 
 const randomString = (count: number): string => {
   return [...Array(count)]
-    .map(() => b64Strings[Math.floor(Math.random() * b64Strings.length)])
+    .map(() => usingStrings[Math.floor(Math.random() * usingStrings.length)])
     .join("");
 };
 
@@ -25,10 +23,13 @@ const randomStringClassSafe = (count: number): string => {
 };
 
 const makeStyle = (className: string): string => {
+  console.log(
+    randomString(Math.floor(Math.random() * usingStrings.length * 10))
+  );
   return `.${className}::before { content: "${randomString(
-    Math.floor(Math.random() * b64Strings.length * 10)
+    Math.floor(Math.random() * usingStrings.length * 10)
   )}"; } .${className}::after { content: "${randomString(
-    Math.floor(Math.random() * b64Strings.length * 10)
+    Math.floor(Math.random() * usingStrings.length * 10)
   )}"; } `;
 };
 
@@ -72,4 +73,8 @@ const makeBody = (text: string): string => {
   return html;
 };
 
-document.querySelector("html").innerHTML = makeBody("naari3");
+const content = ["naari3", "NAARI3", "http://github.com/naari3"];
+
+document.querySelector("html").innerHTML = makeBody(
+  content[Math.floor(Math.random() * content.length)]
+);

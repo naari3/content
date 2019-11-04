@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "deploy": "rm -rf dist && npm run build && gh-pages -d dist"
   },
   "author": "naari3 <naari.named@gmail.com>",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.18.2",
     "ts-loader": "^6.2.1",
