@@ -6,13 +6,13 @@ const classSafeStrings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01
   ""
 );
 
-const randomString = count => {
+const randomString = (count: number): string => {
   return [...Array(count)]
     .map(() => b64Strings[Math.floor(Math.random() * b64Strings.length)])
     .join("");
 };
 
-const randomStringClassSafe = count => {
+const randomStringClassSafe = (count: number): string => {
   return [...Array(count)]
     .map(
       () =>
@@ -21,7 +21,7 @@ const randomStringClassSafe = count => {
     .join("");
 };
 
-const makeStyle = className => {
+const makeStyle = (className: string): string => {
   return `.${className}::before { content: "${randomString(
     Math.floor(Math.random() * b64Strings.length * 10)
   )}"; }
@@ -30,7 +30,7 @@ const makeStyle = className => {
   )}"; } `;
 };
 
-const makeBody = text => {
+const makeBody = (text: string): string => {
   const texts = text.split("");
   const classes = texts.map(() =>
     randomStringClassSafe(
@@ -42,22 +42,23 @@ const makeBody = text => {
   <html lang="js">
     <head>
       <meta charset="utf-8">
-      <style>@font-face {
+      <style>
+        @font-face {
           font-family: "Space Grotesk Light";
           font-weight: 400;
           font-style: normal;
           src: url(https://fonts.floriankarsten.com/assets/fonts/SpaceGrotesk-Light.woff2) format("woff2");
         }
         body {
-        background-color: #000;
-        color: #fff;
-        word-break: break-all;
-        font-family: 'Space Grotesk Light',sans-serif;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 0.8;
-      }
-      ${classes.map(cl => makeStyle(cl)).join("")}</style>
+          background-color: #000;
+          color: #fff;
+          word-break: break-all;
+          font-family: 'Space Grotesk Light',sans-serif;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 0.8;
+        }
+        ${classes.map(cl => makeStyle(cl)).join("")}</style>
     </head>
     <body>
       ${texts.map((c, i) => `<span class="${classes[i]}">${c}</span>`).join("")}
@@ -67,4 +68,4 @@ const makeBody = text => {
   return html;
 };
 
-document.querySelector("html").innerHTML = makeBody("naari3")
+document.querySelector("html").innerHTML = makeBody("naari3");
